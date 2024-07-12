@@ -1,0 +1,76 @@
+@HOST=172.20.19.10
+@PORT=7000
+@URI=/petition/request
+
+POST http://{{HOST}}:{{PORT}}/petition/request
+Content-Type: application/json
+
+{
+  "scheme": "dbo",
+  "dataBase": "BHCTESTEMPLEADOSDB",
+  "storedProcedure": "CreateEmployee",
+  "parameters": {
+        "emp_nombre": "Emerson",
+        "emp_puesto": "IT",
+        "emp_salario": "20000",
+        "emp_fechaContratacion": "2004-05-23T14:25:10"
+  }
+}
+
+###
+
+POST http://{{HOST}}:{{PORT}}/petition/request
+Content-Type: application/json
+
+{
+  "scheme": "dbo",
+  "dataBase": "BHCTESTEMPLEADOSDB",
+  "storedProcedure": "GetEmployeeById",
+  "parameters": {
+        "emp_id": "1"
+  }
+}
+
+###
+
+POST http://{{HOST}}:{{PORT}}/petition/request
+Content-Type: application/json
+
+{
+  "scheme": "dbo",
+  "dataBase": "BHCTESTEMPLEADOSDB",
+  "storedProcedure": "GetEmployees",
+  "parameters": {}
+}
+
+###
+
+POST http://{{HOST}}:{{PORT}}/petition/request
+Content-Type: application/json
+
+{
+  "scheme": "dbo",
+  "dataBase": "BHCTESTEMPLEADOSDB",
+  "storedProcedure": "UpdateEmployees",
+  "parameters": {
+        "emp_id": "1",
+        "emp_nombre": "Emerson",
+        "emp_puesto": "IT",
+        "emp_salario": "30000",
+        "emp_fechaContratacion": "2004-05-23T14:25:10"
+  }
+}
+
+###
+
+POST http://{{HOST}}:{{PORT}}/petition/request
+Content-Type: application/json
+
+{
+  "scheme": "dbo",
+  "dataBase": "BHCTESTEMPLEADOSDB",
+  "storedProcedure": "DeleteEmployees",
+  "parameters": {
+        "emp_id": "1"
+  }
+}
