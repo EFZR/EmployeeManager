@@ -18,6 +18,8 @@ var builder = WebApplication.CreateBuilder(args);
 var appSettings = new AppSettings();
 builder.Configuration.GetSection("Configurations").Bind(appSettings);
 
+// Add services to the container.
+
 #region Services
 
 builder.Services.Configure<AppSettings>(builder.Configuration.GetSection("Configurations"));
@@ -26,30 +28,23 @@ builder.Services.AddControllers();
 
 builder.Services.AddEndpointsApiExplorer();
 
-builder.Services.AddScoped<IConnectionFactory, ConnectionFactory>(cfg =>
-{
-    return new ConnectionFactory(builder.Configuration);
-});
+builder.Services.AddSingleton<IConnectionFactory, ConnectionFactory>();
 
-/*
+// builder.Services.AddScoped<IEmployeeApplication, EmployeeApplication>();
+
 builder.Services.AddScoped<IUserApplication, UserApplication>();
 
-builder.Services.AddScoped<IEmployeeApplication, EmployeeApplication>();
+// builder.Services.AddScoped<IEmployeeDomain, EmployeeDomain>();
 
 builder.Services.AddScoped<IUserDomain, UserDomain>();
 
-builder.Services.AddScoped<IEmployeeDomain, EmployeeDomain>();
-
-builder.Services.AddTransient<IEmployeeRepository, EmployeeRepository>();
+// builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
-*/
 
 builder.Services.AddScoped(typeof(IAppLogger<>), typeof(LoggerAdapter<>));
 
 builder.Services.AddAutoMapper(x => x.AddProfile(new MappingProfile()));
-
-builder.Services.AddSwaggerGen();   
 
 builder.Services.AddSwaggerGen(opt =>
 {

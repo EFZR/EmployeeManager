@@ -5,7 +5,7 @@ IF OBJECT_ID('dbo.Usuario', 'U') IS NOT NULL
     DROP TABLE dbo.Usuario;
 
 CREATE TABLE Empleado (
-    Emp_Id INT PRIMARY KEY IDENTITY,
+  Emp_Id INT PRIMARY KEY IDENTITY,
 	Emp_Nombre VARCHAR(60),
 	Emp_Puesto VARCHAR(60),
 	Emp_Salario DECIMAL(10,2),

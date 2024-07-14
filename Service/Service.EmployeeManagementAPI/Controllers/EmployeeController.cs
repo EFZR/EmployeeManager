@@ -8,13 +8,9 @@ namespace Service.EmployeeManagementAPI.Controllers;
 [Route("api/[controller]/[action]")]
 [ApiController]
 [Authorize]
-public class EmployeeController : ControllerBase
+public class EmployeeController(IEmployeeApplication employeeApplication) : ControllerBase
 {
-    private readonly IEmployeeApplication _employeeApplication;
-    public EmployeeController(IEmployeeApplication employeeApplication)
-    {
-        _employeeApplication = employeeApplication;
-    }
+    private readonly IEmployeeApplication _employeeApplication = employeeApplication;
 
     #region Asynchronous Methods
 

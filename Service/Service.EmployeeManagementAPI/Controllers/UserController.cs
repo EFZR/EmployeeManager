@@ -13,15 +13,10 @@ namespace Service.PizzaPos;
 
 [Route("api/[controller]/[action]")]
 [ApiController]
-public class UserController : ControllerBase
+public class UserController(IUserApplication userApplication, IOptions<AppSettings> appSettings) : ControllerBase
 {
-    private readonly IUserApplication _userApplication;
-    private readonly AppSettings _appSettings;
-    public UserController(IUserApplication userApplication, IOptions<AppSettings> appSettings)
-    {
-        _userApplication = userApplication;
-        _appSettings = appSettings.Value;
-    }
+    private readonly IUserApplication _userApplication = userApplication;
+    private readonly AppSettings _appSettings = appSettings.Value;
 
     // TODO: Make an authDTO.
     [HttpPost]

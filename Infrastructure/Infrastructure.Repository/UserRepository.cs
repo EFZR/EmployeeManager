@@ -1,19 +1,15 @@
 ﻿using System.Data;
 using Dapper;
 using Domain.Entity;
-using Infrastructure.Data;
 using Infrastructure.Interface;
 using Transversal.Common;
 
 namespace Infrastructure.Repository;
 
-public class UserRepository : IUserRepository
+public class UserRepository(IConnectionFactory connectionFactory) : IUserRepository
 {
-    private readonly IConnectionFactory _connectionFactory;
-    public UserRepository(ConnectionFactory connectionFactory)
-    {
-        _connectionFactory = connectionFactory;
-    }
+    private readonly IConnectionFactory _connectionFactory = connectionFactory ?? throw new ArgumentNullException(nameof(connectionFactory));
+
     public async Task<User> Authenticate(string email)
     {
         using var connection = _connectionFactory.GetSqlConnection;
@@ -30,7 +26,7 @@ public class UserRepository : IUserRepository
         parameters.Add("usu_nombre", user.Usu_NombreUsuario);
         parameters.Add("usu_email", user.Usu_Email);
         parameters.Add("usu_password", user.Usu_Password);
-        var result = await connection.ExecuteAsync("Authenticate", parameters, commandType: CommandType.StoredProcedure);
+        var result = await connection.ExecuteAsync("CreateAccount", parameters, commandType: CommandType.StoredProcedure);
         return result > 0;
     }
 }

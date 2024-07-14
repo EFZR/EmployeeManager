@@ -1,20 +1,14 @@
 ﻿using System.Data;
 using Dapper;
 using Domain.Entity;
-using Infrastructure.Data;
 using Infrastructure.Interface;
 using Transversal.Common;
 
 namespace Infrastructure.Repository;
 
-public class EmployeeRepository : IEmployeeRepository
+public class EmployeeRepository(IConnectionFactory connectionFactory) : IEmployeeRepository
 {
-    private readonly IConnectionFactory _connectionFactory;
-
-    public EmployeeRepository(ConnectionFactory connectionFactory)
-    {
-        _connectionFactory = connectionFactory;
-    }
+    private readonly IConnectionFactory _connectionFactory = connectionFactory ?? throw new ArgumentNullException(nameof(connectionFactory));
 
     public async Task<bool> Delete(string employeeId)
     {

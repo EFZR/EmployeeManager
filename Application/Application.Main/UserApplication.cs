@@ -7,17 +7,12 @@ using Domain.Entity;
 
 namespace Application.Main;
 
-public class UserApplication : IUserApplication
+public class UserApplication(IMapper mapper, IUserDomain userDomain, IAppLogger<UserApplication> logger) : IUserApplication
 {
-    private readonly IMapper _mapper;
-    private readonly IUserDomain _userDomain;
-    private readonly IAppLogger<UserApplication> _logger;
-    public UserApplication(IMapper mapper, IUserDomain userDomain, IAppLogger<UserApplication> logger)
-    {
-        _mapper = mapper;
-        _userDomain = userDomain;
-        _logger = logger;
-    }
+    private readonly IMapper _mapper = mapper;
+    private readonly IUserDomain _userDomain = userDomain;
+    private readonly IAppLogger<UserApplication> _logger = logger;
+
     public async Task<Response<UserDTO>> Authenticate(string email, string password)
     {
         var response = new Response<UserDTO>();

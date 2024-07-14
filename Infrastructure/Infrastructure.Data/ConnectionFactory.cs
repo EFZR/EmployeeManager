@@ -5,20 +5,14 @@ using Transversal.Common;
 
 namespace Infrastructure.Data;
 
-public class ConnectionFactory : IConnectionFactory
+public class ConnectionFactory(IConfiguration configuration) : IConnectionFactory
 {
-    private readonly IConfiguration _configuration;
-    public ConnectionFactory(IConfiguration configuration)
-    {
-        Console.WriteLine("00000000000000000000000000000000");
-        _configuration = configuration;
-    }
-
+    private readonly IConfiguration _configuration = configuration;
     public SqlConnection GetSqlConnection
     {
         get
         {
-            var connectionString = _configuration.GetConnectionString("db_connection");
+            var connectionString = _configuration.GetConnectionString("db_Connection");
             var sqlConnection = new SqlConnection(connectionString) ?? throw new Exception("Connection Error.");
             sqlConnection.Open();
             return sqlConnection;

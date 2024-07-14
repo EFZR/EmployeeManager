@@ -4,13 +4,10 @@ using Infrastructure.Interface;
 
 namespace Domain.Core;
 
-public class EmployeeDomain : IEmployeeDomain
+public class EmployeeDomain(IEmployeeRepository employeeRepository) : IEmployeeDomain
 {
-    private readonly IEmployeeRepository _employeeRepository;
-    public EmployeeDomain(IEmployeeRepository employeeRepository)
-    {
-        _employeeRepository = employeeRepository;
-    }
+    private readonly IEmployeeRepository _employeeRepository = employeeRepository;
+
     public async Task<bool> Delete(string employeeId)
     {
         return await _employeeRepository.Delete(employeeId);

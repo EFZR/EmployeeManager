@@ -7,21 +7,15 @@ using Domain.Entity;
 
 namespace Application.Main;
 
-public class EmployeeApplication : IEmployeeApplication
+public class EmployeeApplication(IMapper mapper, IEmployeeDomain employeeDomain, IAppLogger<EmployeeApplication> logger) : IEmployeeApplication
 {
-    private readonly IMapper _mapper;
-    private readonly IEmployeeDomain _employeeDomain;
-    private readonly IAppLogger<EmployeeApplication> _logger;
-
-    public EmployeeApplication(IMapper mapper, IEmployeeDomain employeeDomain, IAppLogger<EmployeeApplication> logger) {
-        _mapper = mapper;
-        _employeeDomain = employeeDomain;
-        _logger = logger;
-    }
+    private readonly IMapper _mapper = mapper;
+    private readonly IEmployeeDomain _employeeDomain = employeeDomain;
+    private readonly IAppLogger<EmployeeApplication> _logger = logger;
 
     public async Task<Response<bool>> Delete(string employeeId)
     {
-         var response = new Response<bool>();
+        var response = new Response<bool>();
         try
         {
             response.Data = await _employeeDomain.Delete(employeeId);

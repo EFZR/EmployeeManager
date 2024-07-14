@@ -4,13 +4,9 @@ using Infrastructure.Interface;
 
 namespace Domain.Core;
 
-public class UserDomain : IUserDomain
+public class UserDomain(IUserRepository userRepository) : IUserDomain
 {
-    private readonly IUserRepository _userRepository;
-    public UserDomain(IUserRepository userRepository)
-    {
-        _userRepository = userRepository;
-    }
+    private readonly IUserRepository _userRepository = userRepository;
 
     public async Task<User> Authenticate(string email, string password)
     {
