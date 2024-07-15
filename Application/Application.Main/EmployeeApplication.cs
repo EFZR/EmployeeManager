@@ -81,7 +81,7 @@ public class EmployeeApplication(IMapper mapper, IEmployeeDomain employeeDomain,
         return response;
     }
 
-    public async Task<Response<bool>> Insert(EmployeeDTO employeeDTO)
+    public async Task<Response<bool>> Insert(CreateEmployeeDTO employeeDTO)
     {
         var response = new Response<bool>();
         try
@@ -104,7 +104,7 @@ public class EmployeeApplication(IMapper mapper, IEmployeeDomain employeeDomain,
         return response;
     }
 
-    public async Task<Response<bool>> Update(EmployeeDTO employeeDTO)
+    public async Task<Response<bool>> Update(UpdateEmployeeDTO employeeDTO)
     {
         var response = new Response<bool>();
         try

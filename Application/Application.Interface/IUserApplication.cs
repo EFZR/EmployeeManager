@@ -7,6 +7,6 @@ public interface IUserApplication
 {
     #region Asynchronous Methods
     Task<Response<UserDTO>> Authenticate(string email, string password);
-    Task<Response<bool>> CreateAccount(UserDTO user);
+    Task<Response<bool>> CreateAccount(CreateUserDTO user);
     #endregion
 }

@@ -20,7 +20,7 @@ public class UserController(IUserApplication userApplication, IOptions<AppSettin
 
     // TODO: Make an authDTO.
     [HttpPost]
-    public async Task<IActionResult> Authenticate([FromBody] UserDTO userDTO)
+    public async Task<IActionResult> Authenticate([FromBody] AuthenticateUserDTO userDTO)
     {
         try
         {
@@ -58,7 +58,7 @@ public class UserController(IUserApplication userApplication, IOptions<AppSettin
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreateAccount([FromBody] UserDTO userDTO)
+    public async Task<IActionResult> CreateAccount([FromBody] CreateUserDTO userDTO)
     {
         if (userDTO == null)
         {

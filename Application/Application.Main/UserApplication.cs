@@ -42,7 +42,7 @@ public class UserApplication(IMapper mapper, IUserDomain userDomain, IAppLogger<
         return response;
     }
 
-    public async Task<Response<bool>> CreateAccount(UserDTO userDTO)
+    public async Task<Response<bool>> CreateAccount(CreateUserDTO userDTO)
     {
         var response = new Response<bool>();
         try

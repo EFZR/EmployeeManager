@@ -15,7 +15,7 @@ public class EmployeeController(IEmployeeApplication employeeApplication) : Cont
     #region Asynchronous Methods
 
     [HttpPost]
-    public async Task<IActionResult> Insert([FromBody] EmployeeDTO employeeDTO)
+    public async Task<IActionResult> Insert([FromBody] CreateEmployeeDTO employeeDTO)
     {
         if (employeeDTO == null)
         {
@@ -58,7 +58,7 @@ public class EmployeeController(IEmployeeApplication employeeApplication) : Cont
     }
 
     [HttpPut]
-    public async Task<IActionResult> Update([FromBody] EmployeeDTO employeeDTO)
+    public async Task<IActionResult> Update([FromBody] UpdateEmployeeDTO employeeDTO)
     {
         if (employeeDTO == null)
         {
