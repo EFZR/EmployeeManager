@@ -13,7 +13,7 @@ public class UserRepository(IConnectionFactory connectionFactory) : IUserReposit
     public async Task<User> Authenticate(string email)
     {
         using var connection = _connectionFactory.GetSqlConnection;
-        var parameters = new DynamicParameters(connection);
+        var parameters = new DynamicParameters();
         parameters.Add("usu_email", email);
         var user = await connection.QuerySingleAsync<User>("Authenticate", parameters, commandType: CommandType.StoredProcedure);
         return user;
@@ -22,8 +22,8 @@ public class UserRepository(IConnectionFactory connectionFactory) : IUserReposit
     public async Task<bool> CreateAccount(User user)
     {
         using var connection = _connectionFactory.GetSqlConnection;
-        var parameters = new DynamicParameters(connection);
-        parameters.Add("usu_nombre", user.Usu_NombreUsuario);
+        var parameters = new DynamicParameters();
+        parameters.Add("usu_nombreUsuario", user.Usu_NombreUsuario);
         parameters.Add("usu_email", user.Usu_Email);
         parameters.Add("usu_password", user.Usu_Password);
         var result = await connection.ExecuteAsync("CreateAccount", parameters, commandType: CommandType.StoredProcedure);

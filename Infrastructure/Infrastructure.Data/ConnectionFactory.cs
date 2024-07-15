@@ -12,7 +12,7 @@ public class ConnectionFactory(IConfiguration configuration) : IConnectionFactor
     {
         get
         {
-            var connectionString = _configuration.GetConnectionString("db_Connection");
+            var connectionString = _configuration.GetConnectionString("db_connection");
             var sqlConnection = new SqlConnection(connectionString) ?? throw new Exception("Connection Error.");
             sqlConnection.Open();
             return sqlConnection;

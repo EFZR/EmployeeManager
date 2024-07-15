@@ -64,13 +64,12 @@ public class UserController(IUserApplication userApplication, IOptions<AppSettin
         {
             return BadRequest(new { error = "All fields are required." });
         }
-
         var response = await _userApplication.CreateAccount(userDTO);
         if (response.IsSuccess)
         {
             return Ok(response);
         }
-        return BadRequest(new { error = "Failed to insert product." });
+        return BadRequest(new { error = "Failed to insert user." });
     }
 
     private string BuildToken(Response<UserDTO> userDTO)
@@ -88,10 +87,9 @@ public class UserController(IUserApplication userApplication, IOptions<AppSettin
         var tokenDescriptor = new SecurityTokenDescriptor
         {
             Subject = new ClaimsIdentity(
-                new Claim[]
-                {
+                [
                     new(ClaimTypes.Name, userDTO.Data.Id!.ToString()),
-                }),
+                ]),
             Expires = DateTime.UtcNow.AddHours(1),
             SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature),
             Issuer = _appSettings.Issuer,

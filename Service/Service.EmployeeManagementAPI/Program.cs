@@ -30,17 +30,17 @@ builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddSingleton<IConnectionFactory, ConnectionFactory>();
 
-// builder.Services.AddScoped<IEmployeeApplication, EmployeeApplication>();
+builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
 
-builder.Services.AddScoped<IUserApplication, UserApplication>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 
-// builder.Services.AddScoped<IEmployeeDomain, EmployeeDomain>();
+builder.Services.AddScoped<IEmployeeDomain, EmployeeDomain>();
 
 builder.Services.AddScoped<IUserDomain, UserDomain>();
 
-// builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+builder.Services.AddScoped<IEmployeeApplication, EmployeeApplication>();
 
-builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IUserApplication, UserApplication>();
 
 builder.Services.AddScoped(typeof(IAppLogger<>), typeof(LoggerAdapter<>));
 

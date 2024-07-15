@@ -11,7 +11,6 @@ public class UserDomain(IUserRepository userRepository) : IUserDomain
     public async Task<User> Authenticate(string email, string password)
     {
         var user = await _userRepository.Authenticate(email) ?? throw new Exception("No user was found with that email.");
-
         if (user.Usu_Password != password)
         {
             throw new Exception("Incorrect Password.");

@@ -47,7 +47,7 @@ public class UserApplication(IMapper mapper, IUserDomain userDomain, IAppLogger<
         var response = new Response<bool>();
         try
         {
-            var user = _mapper.Map<User>(userDTO);
+            User user = _mapper.Map<User>(userDTO);
             response.Data = await _userDomain.CreateAccount(user);
             if (response.Data == true)
             {

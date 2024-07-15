@@ -13,7 +13,7 @@ public class EmployeeRepository(IConnectionFactory connectionFactory) : IEmploye
     public async Task<bool> Delete(string employeeId)
     {
         using var connection = _connectionFactory.GetSqlConnection;
-        var parameters = new DynamicParameters(connection);
+        var parameters = new DynamicParameters();
         parameters.Add("emp_id", employeeId);
         var result = await connection.ExecuteAsync("DeleteEmployees", parameters, commandType: CommandType.StoredProcedure);
         return result > 0;
@@ -22,7 +22,7 @@ public class EmployeeRepository(IConnectionFactory connectionFactory) : IEmploye
     public async Task<Employee> Get(string employeeId)
     {
         using var connection = _connectionFactory.GetSqlConnection;
-        var parameters = new DynamicParameters(connection);
+        var parameters = new DynamicParameters();
         parameters.Add("emp_id", employeeId);
         var employee = await connection.QuerySingleAsync<Employee>("GetEmployeeById", parameters, commandType: CommandType.StoredProcedure);
         return employee;
@@ -31,7 +31,7 @@ public class EmployeeRepository(IConnectionFactory connectionFactory) : IEmploye
     public async Task<IEnumerable<Employee>> GetAll()
     {
         using var connection = _connectionFactory.GetSqlConnection;
-        var parameters = new DynamicParameters(connection);
+        var parameters = new DynamicParameters();
         var employees = await connection.QueryAsync<Employee>("GetEmployees");
         return employees;
     }
@@ -39,7 +39,7 @@ public class EmployeeRepository(IConnectionFactory connectionFactory) : IEmploye
     public async Task<bool> Insert(Employee employee)
     {
         using var connection = _connectionFactory.GetSqlConnection;
-        var parameters = new DynamicParameters(connection);
+        var parameters = new DynamicParameters();
         parameters.Add("emp_nombre", employee.Emp_Nombre);
         parameters.Add("emp_puesto", employee.Emp_Puesto);
         parameters.Add("emp_salario", employee.Emp_Salario);
@@ -51,7 +51,7 @@ public class EmployeeRepository(IConnectionFactory connectionFactory) : IEmploye
     public async Task<bool> Update(Employee employee)
     {
         using var connection = _connectionFactory.GetSqlConnection;
-        var parameters = new DynamicParameters(connection);
+        var parameters = new DynamicParameters();
         parameters.Add("emp_id", employee.Emp_Id);
         parameters.Add("emp_nombre", employee.Emp_Nombre);
         parameters.Add("emp_puesto", employee.Emp_Puesto);
