@@ -2,6 +2,7 @@
 
 namespace Domain.Interface;
 
+// Defines the contract for user-related operations in the domain layer.
 public interface IUserDomain
 {
     #region Asynchronous Methods

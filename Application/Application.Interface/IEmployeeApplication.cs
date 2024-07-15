@@ -3,6 +3,7 @@ using Transversal.Common;
 
 namespace Application.Interface;
 
+// Defines the contract for employee-related operations in the application layer.
 public interface IEmployeeApplication
 {
     #region Asynchronous Methods

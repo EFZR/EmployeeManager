@@ -2,6 +2,7 @@
 
 namespace Domain.Interface;
 
+// Defines the contract for employee-related operations in the domain layer.
 public interface IEmployeeDomain
 {
     #region Asynchronous Methods

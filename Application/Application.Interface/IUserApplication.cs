@@ -3,6 +3,7 @@ using Transversal.Common;
 
 namespace Application.Interface;
 
+// Defines the contract for user-related operations in the application layer.
 public interface IUserApplication
 {
     #region Asynchronous Methods

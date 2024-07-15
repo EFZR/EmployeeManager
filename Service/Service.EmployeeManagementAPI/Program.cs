@@ -18,41 +18,49 @@ var builder = WebApplication.CreateBuilder(args);
 var appSettings = new AppSettings();
 builder.Configuration.GetSection("Configurations").Bind(appSettings);
 
-// Add services to the container.
+// Configure services for the application container.
 
 #region Services
 
+// Bind the application settings from the configuration.
 builder.Services.Configure<AppSettings>(builder.Configuration.GetSection("Configurations"));
 
+// Add support for controllers in the application.
 builder.Services.AddControllers();
 
+// Enable API endpoint exploration for better documentation.
 builder.Services.AddEndpointsApiExplorer();
 
+// Register a singleton instance of the connection factory for database access.
+// This improves performance by reusing the same instance across the application.
 builder.Services.AddSingleton<IConnectionFactory, ConnectionFactory>();
 
+// Register repository layer services for data access.
 builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
-
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 
+// Register domain layer services for business logic.
 builder.Services.AddScoped<IEmployeeDomain, EmployeeDomain>();
-
 builder.Services.AddScoped<IUserDomain, UserDomain>();
 
+// Register application layer services for handling requests.
 builder.Services.AddScoped<IEmployeeApplication, EmployeeApplication>();
-
 builder.Services.AddScoped<IUserApplication, UserApplication>();
 
+// Register the logging service.
 builder.Services.AddScoped(typeof(IAppLogger<>), typeof(LoggerAdapter<>));
 
+// Configure AutoMapper for mapping between DTOs and entities throughout the application.
 builder.Services.AddAutoMapper(x => x.AddProfile(new MappingProfile()));
 
+// Set up Swagger for API documentation.
 builder.Services.AddSwaggerGen(opt =>
 {
     opt.SwaggerDoc("v1", new OpenApiInfo { Title = "Pizzeria POS", Version = "v1" });
     opt.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
         In = ParameterLocation.Header,
-        Description = "Please enter token",
+        Description = "Enter your token here",
         Name = "Authorization",
         Type = SecuritySchemeType.Http,
         BearerFormat = "JWT",
@@ -66,8 +74,8 @@ builder.Services.AddSwaggerGen(opt =>
             {
                 Reference = new OpenApiReference
                 {
-                    Type=ReferenceType.SecurityScheme,
-                    Id="Bearer"
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "Bearer"
                 }
             },
             Array.Empty<string>()
@@ -75,6 +83,7 @@ builder.Services.AddSwaggerGen(opt =>
     });
 });
 
+// Configure JWT authentication for securing API endpoints.
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
@@ -99,14 +108,15 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
+    // Enable Swagger UI in development mode for API testing.
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+app.UseHttpsRedirection(); // Redirect HTTP requests to HTTPS.
 
-app.UseAuthorization();
+app.UseAuthorization(); // Enable authorization middleware.
 
-app.MapControllers();
+app.MapControllers(); // Map controller routes to the application.
 
-app.Run();
+app.Run(); // Start the application.

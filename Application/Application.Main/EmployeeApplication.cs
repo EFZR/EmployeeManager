@@ -15,6 +15,7 @@ public class EmployeeApplication(IMapper mapper, IEmployeeDomain employeeDomain,
 
     public async Task<Response<bool>> Delete(string employeeId)
     {
+        // Deletes an employee identified by the given employeeId.
         var response = new Response<bool>();
         try
         {
@@ -22,8 +23,8 @@ public class EmployeeApplication(IMapper mapper, IEmployeeDomain employeeDomain,
             if (response.Data == true)
             {
                 response.IsSuccess = true;
-                response.Message = "Employee deleted Succesfully.";
-                _logger.LogInformation("Employee deleted Succesfully.");
+                response.Message = "Employee deleted successfully.";
+                _logger.LogInformation("Employee deleted successfully.");
             }
         }
         catch (Exception ex)
@@ -37,6 +38,7 @@ public class EmployeeApplication(IMapper mapper, IEmployeeDomain employeeDomain,
 
     public async Task<Response<EmployeeDTO>> Get(string employeeId)
     {
+        // Retrieves the details of a specific employee identified by employeeId.
         var response = new Response<EmployeeDTO>();
         try
         {
@@ -45,8 +47,8 @@ public class EmployeeApplication(IMapper mapper, IEmployeeDomain employeeDomain,
             if (response.Data != null)
             {
                 response.IsSuccess = true;
-                response.Message = "Employee Query Succesfully.";
-                _logger.LogInformation("Employee Query Succesfully.");
+                response.Message = "Employee queried successfully.";
+                _logger.LogInformation("Employee queried successfully.");
             }
         }
         catch (Exception ex)
@@ -60,6 +62,7 @@ public class EmployeeApplication(IMapper mapper, IEmployeeDomain employeeDomain,
 
     public async Task<Response<IEnumerable<EmployeeDTO>>> GetAll()
     {
+        // Retrieves a list of all employees.
         var response = new Response<IEnumerable<EmployeeDTO>>();
         try
         {
@@ -68,8 +71,8 @@ public class EmployeeApplication(IMapper mapper, IEmployeeDomain employeeDomain,
             if (response.Data != null)
             {
                 response.IsSuccess = true;
-                response.Message = "Employee Query Succesfully.";
-                _logger.LogInformation("Employee Query Succesfully.");
+                response.Message = "Employees queried successfully.";
+                _logger.LogInformation("Employees queried successfully.");
             }
         }
         catch (Exception ex)
@@ -83,6 +86,7 @@ public class EmployeeApplication(IMapper mapper, IEmployeeDomain employeeDomain,
 
     public async Task<Response<bool>> Insert(CreateEmployeeDTO employeeDTO)
     {
+        // Inserts a new employee using the provided employeeDTO data.
         var response = new Response<bool>();
         try
         {
@@ -91,8 +95,8 @@ public class EmployeeApplication(IMapper mapper, IEmployeeDomain employeeDomain,
             if (response.Data == true)
             {
                 response.IsSuccess = true;
-                response.Message = "Employee created Succesfully.";
-                _logger.LogInformation("Employee created Succesfully.");
+                response.Message = "Employee created successfully.";
+                _logger.LogInformation("Employee created successfully.");
             }
         }
         catch (Exception ex)
@@ -106,6 +110,7 @@ public class EmployeeApplication(IMapper mapper, IEmployeeDomain employeeDomain,
 
     public async Task<Response<bool>> Update(UpdateEmployeeDTO employeeDTO)
     {
+        // Updates an existing employee using the provided employeeDTO data.
         var response = new Response<bool>();
         try
         {
@@ -114,8 +119,8 @@ public class EmployeeApplication(IMapper mapper, IEmployeeDomain employeeDomain,
             if (response.Data == true)
             {
                 response.IsSuccess = true;
-                response.Message = "Employee updated Succesfully.";
-                _logger.LogInformation("Employee updated Succesfully.");
+                response.Message = "Employee updated successfully.";
+                _logger.LogInformation("Employee updated successfully.");
             }
         }
         catch (Exception ex)
@@ -126,4 +131,5 @@ public class EmployeeApplication(IMapper mapper, IEmployeeDomain employeeDomain,
         }
         return response;
     }
+
 }

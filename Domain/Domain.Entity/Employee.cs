@@ -1,5 +1,6 @@
 ﻿namespace Domain.Entity;
 
+// Represents the employee entity that maps to the columns in the repository database.
 public class Employee
 {
     public string? Emp_Id { get; set; }

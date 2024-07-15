@@ -15,6 +15,7 @@ public class UserApplication(IMapper mapper, IUserDomain userDomain, IAppLogger<
 
     public async Task<Response<UserDTO>> Authenticate(string email, string password)
     {
+        // Authenticates a user with the given email and password.
         var response = new Response<UserDTO>();
         if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
         {
@@ -44,6 +45,7 @@ public class UserApplication(IMapper mapper, IUserDomain userDomain, IAppLogger<
 
     public async Task<Response<bool>> CreateAccount(CreateUserDTO userDTO)
     {
+        // Creates a new user account based on the provided CreateUserDTO data.
         var response = new Response<bool>();
         try
         {
