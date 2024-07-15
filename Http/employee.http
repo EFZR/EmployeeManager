@@ -1,0 +1,43 @@
+@HOST=localhost
+@PORT=5026
+@TOKEN=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjUiLCJuYmYiOjE3MjEwMTkwNTMsImV4cCI6MTcyMTAyMjY1MywiaWF0IjoxNzIxMDE5MDUzLCJpc3MiOiJFeGFtcGxlSXNzdWVyIiwiYXVkIjoiRXhhbXBsZUF1ZGllbmNlIn0.ZtIv3BXLuTM8lHNeMsIpY8EYqq9uMIXDEmovMnhBEGU
+
+POST http://{{HOST}}:{{PORT}}/api/Employee/Insert
+Content-Type: application/json
+Authorization: Bearer {{TOKEN}}
+
+{
+  "nombre": "John Doe",
+  "puesto": "Techonology Information",
+  "salario": "30000",
+  "fechaContratacion": "2008-11-11 13:23:44"
+}
+
+###
+
+GET http://{{HOST}}:{{PORT}}/api/Employee/Get/employeeId?employeeId=7
+Authorization: Bearer {{TOKEN}}
+
+###
+
+GET http://{{HOST}}:{{PORT}}/api/Employee/GetAll
+Authorization: Bearer {{TOKEN}}
+
+###
+
+PUT http://{{HOST}}:{{PORT}}/api/Employee/Update
+Content-Type: application/json
+Authorization: Bearer {{TOKEN}}
+
+{
+  "id": "7",
+  "nombre": "John Dinamarca",
+  "puesto": "Techonology Information",
+  "salario": "30000",
+  "fechaContratacion": "2008-11-11 13:23:44"
+}
+
+###
+
+DELETE  http://{{HOST}}:{{PORT}}/api/Employee/Delete/employeeId?employeeId=7
+Authorization: Bearer {{TOKEN}}

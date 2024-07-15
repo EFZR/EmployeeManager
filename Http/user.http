@@ -1,0 +1,21 @@
+@HOST=localhost
+@PORT=5026
+
+POST http://{{HOST}}:{{PORT}}/api/User/Authenticate
+Content-Type: application/json
+
+{
+  "email": "johanna@mail.com",
+  "password": "password"
+}
+
+###
+
+POST http://{{HOST}}:{{PORT}}/api/User/CreateAccount
+Content-Type: application/json
+
+{
+  "nombreUsuario": "johanna",
+  "email": "johanna@mail.com",
+  "password": "password"
+}
